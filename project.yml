@@ -1,0 +1,50 @@
+name: EnTimeCode
+options:
+  bundleIdPrefix: dev.ilish.entimecode
+  deploymentTarget:
+    iOS: "26.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+targets:
+  EnTimeCode:
+    type: application
+    platform: iOS
+    sources:
+      - path: EnTimeCode
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.ilish.entimecode.app
+        INFOPLIST_FILE: EnTimeCode/Resources/Info.plist
+        SWIFT_OBJC_BRIDGING_HEADER: EnTimeCode/EnTimeCode-Bridging-Header.h
+        GENERATE_INFOPLIST_FILE: NO
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+  EnTimeCodeTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: EnTimeCodeTests
+    dependencies:
+      - target: EnTimeCode
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.ilish.entimecode.app.tests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  EnTimeCode:
+    build:
+      targets:
+        EnTimeCode: all
+    test:
+      targets:
+        - EnTimeCodeTests
