@@ -86,9 +86,12 @@ struct ContentView: View {
                 Button { batch.clearFinished() } label: { slateIcon("tray.and.arrow.up") }
             }
 
-            Button { showDiagnostics = true } label: {
-                slateIcon(Diagnostics.shared.previousSessionCrashed ? "exclamationmark.triangle.fill" : "ladybug",
-                          tint: Diagnostics.shared.previousSessionCrashed ? Slate.warn : Slate.chalkDim)
+            // Diagnostics button is hidden in normal operation; it only appears if the previous
+            // session ended abnormally, so the breadcrumb log can still be retrieved.
+            if Diagnostics.shared.previousSessionCrashed {
+                Button { showDiagnostics = true } label: {
+                    slateIcon("exclamationmark.triangle.fill", tint: Slate.warn)
+                }
             }
         }
     }
